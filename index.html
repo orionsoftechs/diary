@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Primary Homework Diary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --secondary: #FF9800;
+            --accent1: #2196F3;
+            --accent2: #E91E63;
+            --accent3: #9C27B0;
+            --light: #f9f9f9;
+            --dark: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f8ff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent1));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .tabs {
+            display: flex;
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            font-weight: bold;
+        }
+        
+        .tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .tab:hover:not(.active) {
+            background-color: var(--light);
+        }
+        
+        .tab-content {
+            display: none;
+            background-color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px dotted var(--secondary);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3d8b40;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-success {
+            background-color: var(--accent1);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #0b7dda;
+            transform: translateY(-2px);
+        }
+        
+        .btn-danger {
+            background-color: var(--accent2);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c2185b;
+            transform: translateY(-2px);
+        }
+        
+        .homework-list {
+            margin-top: 20px;
+        }
+        
+        .homework-item {
+            background-color: var(--light);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--primary);
+            transition: transform 0.3s;
+        }
+        
+        .homework-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .homework-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .homework-subject {
+            font-weight: bold;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+        
+        .homework-date {
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+        
+        .homework-description {
+            margin-bottom: 10px;
+        }
+        
+        .homework-teacher {
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .admin-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .template-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .template-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+        
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .template-card.active {
+            border-color: var(--primary);
+        }
+        
+        .template-preview {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+        
+        .template-info {
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .template-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .template-desc {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .diary-preview {
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        
+        .print-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #ddd;
+        }
+        
+        .print-header h2 {
+            border-bottom: none;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .week-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .week-selector select {
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .diary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .diary-table th, .diary-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .diary-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .diary-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .no-homework {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            padding: 20px;
+        }
+        
+        .class-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .class-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--primary);
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .class-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .class-btn:hover:not(.active) {
+            background: rgba(76, 175, 80, 0.1);
+        }
+        
+        /* Template-specific styles */
+        .template-animals .template-preview { background: linear-gradient(135deg, #FFD54F, #FFB74D); color: #5D4037; }
+        .template-nature .template-preview { background: linear-gradient(135deg, #81C784, #4CAF50); color: #1B5E20; }
+        .template-space .template-preview { background: linear-gradient(135deg, #7986CB, #3F51B5); color: #E8EAF6; }
+        .template-ocean .template-preview { background: linear-gradient(135deg, #4FC3F7, #0288D1); color: #E1F5FE; }
+        .template-fairytale .template-preview { background: linear-gradient(135deg, #BA68C8, #8E24AA); color: #F3E5F5; }
+        
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            
+            .diary-preview, .diary-preview * {
+                visibility: visible;
+            }
+            
+            .diary-preview {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                box-shadow: none;
+            }
+            
+            .no-print {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .admin-controls {
+                flex-direction: column;
+            }
+            
+            .template-selector {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-book-open"></i>
+                    <h1>Pre-Primary Homework Diary</h1>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">T</div>
+                    <span>Teacher Portal</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" data-tab="teacher">Add Homework</div>
+            <div class="tab" data-tab="view">View Homework</div>
+            <div class="tab" data-tab="templates">Diary Templates</div>
+            <div class="tab" data-tab="admin">Admin</div>
+        </div>
+        
+        <!-- Teacher Tab - Add Homework -->
+        <div class="tab-content active" id="teacher-tab">
+            <h2><i class="fas fa-plus-circle"></i> Add New Homework</h2>
+            
+            <div class="class-selector">
+                <div class="class-btn active" data-class="all">All Classes</div>
+                <div class="class-btn" data-class="nursery">Nursery</div>
+                <div class="class-btn" data-class="kg1">KG-1</div>
+                <div class="class-btn" data-class="kg2">KG-2</div>
+            </div>
+            
+            <form id="homework-form">
+                <div class="form-group">
+                    <label for="teacher-name"><i class="fas fa-user"></i> Teacher Name</label>
+                    <input type="text" id="teacher-name" placeholder="Enter your name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="class"><i class="fas fa-users"></i> Class</label>
+                    <select id="class" required>
+                        <option value="">Select a class</option>
+                        <option value="nursery">Nursery</option>
+                        <option value="kg1">KG-1</option>
+                        <option value="kg2">KG-2</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject"><i class="fas fa-book"></i> Subject/Activity</label>
+                    <select id="subject" required>
+                        <option value="">Select a subject</option>
+                        <option value="Language">Language Skills</option>
+                        <option value="Math">Math Concepts</option>
+                        <option value="Art">Art & Craft</option>
+                        <option value="Music">Music & Movement</option>
+                        <option value="Story">Story Time</option>
+                        <option value="Science">Science Exploration</option>
+                        <option value="Physical">Physical Development</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="due-date"><i class="fas fa-calendar-alt"></i> Due Date</label>
+                    <input type="date" id="due-date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="homework-description"><i class="fas fa-pencil-alt"></i> Activity Description</label>
+                    <textarea id="homework-description" placeholder="Describe the activity or homework..." required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add Homework</button>
+            </form>
+            
+            <div class="homework-list" id="recent-homework">
+                <h3><i class="fas fa-history"></i> Recently Added Activities</h3>
+                <!-- Recent homework items will be added here by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- View Tab - View Homework -->
+        <div class="tab-content" id="view-tab">
+            <h2><i class="fas fa-list"></i> All Activities & Homework</h2>
+            
+            <div class="week-selector">
+                <select id="week-filter">
+                    <option value="all">All Weeks</option>
+                    <option value="current">Current Week</option>
+                    <option value="next">Next Week</option>
+                </select>
+                <select id="class-filter">
+                    <option value="all">All Classes</option>
+                    <option value="nursery">Nursery</option>
+                    <option value="kg1">KG-1</option>
+                    <option value="kg2">KG-2</option>
+                </select>
+                <select id="subject-filter">
+                    <option value="all">All Subjects</option>
+                    <option value="Language">Language Skills</option>
+                    <option value="Math">Math Concepts</option>
+                    <option value="Art">Art & Craft</option>
+                    <option value="Music">Music & Movement</option>
+                    <option value="Story">Story Time</option>
+                    <option value="Science">Science Exploration</option>
+                    <option value="Physical">Physical Development</option>
+                </select>
+            </div>
+            
+            <div id="homework-list-view">
+                <!-- Homework items will be displayed here by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Templates Tab -->
+        <div class="tab-content" id="templates-tab">
+            <h2><i class="fas fa-palette"></i> Choose a Diary Template</h2>
+            <p>Select a beautiful template for the homework diary. Each template has a unique design perfect for pre-primary children.</p>
+            
+            <div class="template-selector">
+                <div class="template-card template-animals active" data-template="animals">
+                    <div class="template-preview">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <div class="template-info">
+                        <div class="template-name">Animal Friends</div>
+                        <div class="template-desc">Cute animals and nature elements</div>
+                    </div>
+                </div>
+                
+                <div class="template-card template-nature" data-template="nature">
+                    <div class="template-preview">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="template-info">
+                        <div class="template-name">Nature Explorer</div>
+                        <div class="template-desc">Plants, trees, and outdoor adventures</div>
+                    </div>
+                </div>
+                
+                <div class="template-card template-space" data-template="space">
+                    <div class="template-preview">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="template-info">
+                        <div class="template-name">Space Adventure</div>
+                        <div class="template-desc">Planets, stars, and rockets</div>
+                    </div>
+                </div>
+                
+                <div class="template-card template-ocean" data-template="ocean">
+                    <div class="template-preview">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <div class="template-info">
+                        <div class="template-name">Ocean World</div>
+                        <div class="template-desc">Sea creatures and underwater scenes</div>
+                    </div>
+                </div>
+                
+                <div class="template-card template-fairytale" data-template="fairytale">
+                    <div class="template-preview">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="template-info">
+                        <div class="template-name">Fairy Tale</div>
+                        <div class="template-desc">Castles, princesses, and magical creatures</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="diary-preview" id="template-preview">
+                <div class="print-header">
+                    <h2>Pre-Primary Homework Diary</h2>
+                    <p>Week of: <span id="current-week">October 16-20, 2023</span></p>
+                    <p>Class: <span id="preview-class">Nursery</span></p>
+                </div>
+                
+                <table class="diary-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Activity</th>
+                            <th>Description</th>
+                            <th>Teacher</th>
+                        </tr>
+                    </thead>
+                    <tbody id="template-table-body">
+                        <!-- Diary entries will be added here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="admin-controls">
+                <button class="btn btn-primary" id="print-template"><i class="fas fa-print"></i> Print This Template</button>
+                <button class="btn btn-success" id="save-template"><i class="fas fa-save"></i> Save Template</button>
+            </div>
+        </div>
+        
+        <!-- Admin Tab - Manage Diary -->
+        <div class="tab-content" id="admin-tab">
+            <h2><i class="fas fa-cog"></i> Admin - Homework Diary Management</h2>
+            
+            <div class="admin-controls">
+                <button class="btn btn-primary" id="print-diary"><i class="fas fa-print"></i> Print Diary</button>
+                <button class="btn btn-success" id="export-diary"><i class="fas fa-file-pdf"></i> Export as PDF</button>
+                <button class="btn btn-danger" id="clear-all"><i class="fas fa-trash"></i> Clear All Homework</button>
+            </div>
+            
+            <div class="diary-preview">
+                <div class="print-header">
+                    <h2>Pre-Primary Homework Diary</h2>
+                    <p>Week of: <span id="admin-current-week">October 16-20, 2023</span></p>
+                </div>
+                
+                <table class="diary-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Class</th>
+                            <th>Activity</th>
+                            <th>Description</th>
+                            <th>Teacher</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-table-body">
+                        <!-- Diary entries will be added here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for demonstration
+        let homeworkData = [
+            {
+                id: 1,
+                teacher: "Ms. Johnson",
+                class: "nursery",
+                subject: "Art",
+                dueDate: "2023-10-18",
+                description: "Draw your favorite animal and color it.",
+                addedDate: "2023-10-16"
+            },
+            {
+                id: 2,
+                teacher: "Mr. Davis",
+                class: "kg1",
+                subject: "Math",
+                dueDate: "2023-10-20",
+                description: "Count objects at home (toys, fruits, etc.) up to 10.",
+                addedDate: "2023-10-16"
+            },
+            {
+                id: 3,
+                teacher: "Mrs. Wilson",
+                class: "kg2",
+                subject: "Language",
+                dueDate: "2023-10-19",
+                description: "Practice writing your name 5 times.",
+                addedDate: "2023-10-17"
+            },
+            {
+                id: 4,
+                teacher: "Ms. Garcia",
+                class: "nursery",
+                subject: "Music",
+                dueDate: "2023-10-21",
+                description: "Sing the 'ABC' song with your family.",
+                addedDate: "2023-10-18"
+            }
+        ];
+
+        // DOM elements
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const homeworkForm = document.getElementById('homework-form');
+        const homeworkListView = document.getElementById('homework-list-view');
+        const adminTableBody = document.getElementById('admin-table-body');
+        const templateTableBody = document.getElementById('template-table-body');
+        const recentHomework = document.getElementById('recent-homework');
+        const printButton = document.getElementById('print-diary');
+        const exportButton = document.getElementById('export-diary');
+        const clearButton = document.getElementById('clear-all');
+        const weekFilter = document.getElementById('week-filter');
+        const classFilter = document.getElementById('class-filter');
+        const subjectFilter = document.getElementById('subject-filter');
+        const classButtons = document.querySelectorAll('.class-btn');
+        const templateCards = document.querySelectorAll('.template-card');
+        const printTemplateButton = document.getElementById('print-template');
+        const saveTemplateButton = document.getElementById('save-template');
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default date to today
+            document.getElementById('due-date').valueAsDate = new Date();
+            
+            // Load initial data
+            renderHomeworkList();
+            renderAdminTable();
+            renderTemplateTable();
+            renderRecentHomework();
+            
+            // Set up event listeners
+            setupEventListeners();
+        });
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Tab switching
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Update active tab content
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                    
+                    // Refresh data when switching tabs
+                    if (tabId === 'view') {
+                        renderHomeworkList();
+                    } else if (tabId === 'admin') {
+                        renderAdminTable();
+                    } else if (tabId === 'templates') {
+                        renderTemplateTable();
+                    }
+                });
+            });
+            
+            // Form submission
+            homeworkForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                addHomework();
+            });
+            
+            // Class filter buttons
+            classButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    classButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const selectedClass = this.getAttribute('data-class');
+                    filterHomeworkByClass(selectedClass);
+                });
+            });
+            
+            // Template selection
+            templateCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    templateCards.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const template = this.getAttribute('data-template');
+                    applyTemplate(template);
+                });
+            });
+            
+            // Print functionality
+            printButton.addEventListener('click', function() {
+                window.print();
+            });
+            
+            printTemplateButton.addEventListener('click', function() {
+                window.print();
+            });
+            
+            // Export functionality (simulated)
+            exportButton.addEventListener('click', function() {
+                alert('In a real application, this would export the diary as a PDF file.');
+            });
+            
+            saveTemplateButton.addEventListener('click', function() {
+                alert('Template saved successfully!');
+            });
+            
+            // Clear all homework
+            clearButton.addEventListener('click', function() {
+                if (confirm('Are you sure you want to clear all homework? This action cannot be undone.')) {
+                    homeworkData = [];
+                    renderHomeworkList();
+                    renderAdminTable();
+                    renderTemplateTable();
+                    renderRecentHomework();
+                    alert('All homework has been cleared.');
+                }
+            });
+            
+            // Filter changes
+            weekFilter.addEventListener('change', renderHomeworkList);
+            classFilter.addEventListener('change', renderHomeworkList);
+            subjectFilter.addEventListener('change', renderHomeworkList);
+        }
+
+        // Add new homework
+        function addHomework() {
+            const teacherName = document.getElementById('teacher-name').value;
+            const className = document.getElementById('class').value;
+            const subject = document.getElementById('subject').value;
+            const dueDate = document.getElementById('due-date').value;
+            const description = document.getElementById('homework-description').value;
+            
+            const newHomework = {
+                id: homeworkData.length > 0 ? Math.max(...homeworkData.map(h => h.id)) + 1 : 1,
+                teacher: teacherName,
+                class: className,
+                subject: subject,
+                dueDate: dueDate,
+                description: description,
+                addedDate: new Date().toISOString().split('T')[0]
+            };
+            
+            homeworkData.push(newHomework);
+            
+            // Reset form
+            homeworkForm.reset();
+            document.getElementById('due-date').valueAsDate = new Date();
+            
+            // Update displays
+            renderRecentHomework();
+            
+            alert('Homework added successfully!');
+        }
+
+        // Filter homework by class
+        function filterHomeworkByClass(selectedClass) {
+            const homeworkItems = document.querySelectorAll('.homework-item');
+            
+            homeworkItems.forEach(item => {
+                if (selectedClass === 'all' || item.getAttribute('data-class') === selectedClass) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Render homework list in the view tab
+        function renderHomeworkList() {
+            const weekFilterValue = weekFilter.value;
+            const classFilterValue = classFilter.value;
+            const subjectFilterValue = subjectFilter.value;
+            
+            let filteredHomework = [...homeworkData];
+            
+            // Apply week filter
+            if (weekFilterValue !== 'all') {
+                const today = new Date();
+                const startOfWeek = new Date(today);
+                startOfWeek.setDate(today.getDate() - today.getDay());
+                
+                if (weekFilterValue === 'current') {
+                    const endOfWeek = new Date(startOfWeek);
+                    endOfWeek.setDate(startOfWeek.getDate() + 6);
+                    
+                    filteredHomework = filteredHomework.filter(homework => {
+                        const dueDate = new Date(homework.dueDate);
+                        return dueDate >= startOfWeek && dueDate <= endOfWeek;
+                    });
+                } else if (weekFilterValue === 'next') {
+                    const startOfNextWeek = new Date(startOfWeek);
+                    startOfNextWeek.setDate(startOfWeek.getDate() + 7);
+                    const endOfNextWeek = new Date(startOfNextWeek);
+                    endOfNextWeek.setDate(startOfNextWeek.getDate() + 6);
+                    
+                    filteredHomework = filteredHomework.filter(homework => {
+                        const dueDate = new Date(homework.dueDate);
+                        return dueDate >= startOfNextWeek && dueDate <= endOfNextWeek;
+                    });
+                }
+            }
+            
+            // Apply class filter
+            if (classFilterValue !== 'all') {
+                filteredHomework = filteredHomework.filter(homework => 
+                    homework.class === classFilterValue
+                );
+            }
+            
+            // Apply subject filter
+            if (subjectFilterValue !== 'all') {
+                filteredHomework = filteredHomework.filter(homework => 
+                    homework.subject === subjectFilterValue
+                );
+            }
+            
+            // Sort by due date
+            filteredHomework.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+            
+            // Render the list
+            if (filteredHomework.length === 0) {
+                homeworkListView.innerHTML = '<div class="no-homework">No homework assignments found.</div>';
+                return;
+            }
+            
+            homeworkListView.innerHTML = filteredHomework.map(homework => `
+                <div class="homework-item" data-class="${homework.class}">
+                    <div class="homework-header">
+                        <span class="homework-subject">${homework.subject} (${homework.class.toUpperCase()})</span>
+                        <span class="homework-date">Due: ${formatDate(homework.dueDate)}</span>
+                    </div>
+                    <div class="homework-description">${homework.description}</div>
+                    <div class="homework-teacher">Assigned by: ${homework.teacher}</div>
+                </div>
+            `).join('');
+        }
+
+        // Render admin table
+        function renderAdminTable() {
+            if (homeworkData.length === 0) {
+                adminTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="no-homework">No homework assignments to display.</td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            // Sort by due date
+            const sortedHomework = [...homeworkData].sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+            
+            // Build table rows
+            let tableHTML = '';
+            sortedHomework.forEach(homework => {
+                tableHTML += `
+                    <tr>
+                        <td>${formatDate(homework.dueDate)}</td>
+                        <td>${homework.class.toUpperCase()}</td>
+                        <td>${homework.subject}</td>
+                        <td>${homework.description}</td>
+                        <td>${homework.teacher}</td>
+                    </tr>
+                `;
+            });
+            
+            adminTableBody.innerHTML = tableHTML;
+        }
+
+        // Render template table
+        function renderTemplateTable() {
+            if (homeworkData.length === 0) {
+                templateTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="no-homework">No homework assignments to display.</td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            // Get only current week homework
+            const today = new Date();
+            const startOfWeek = new Date(today);
+            startOfWeek.setDate(today.getDate() - today.getDay());
+            const endOfWeek = new Date(startOfWeek);
+            endOfWeek.setDate(startOfWeek.getDate() + 6);
+            
+            const currentWeekHomework = homeworkData.filter(homework => {
+                const dueDate = new Date(homework.dueDate);
+                return dueDate >= startOfWeek && dueDate <= endOfWeek;
+            });
+            
+            // Sort by due date
+            currentWeekHomework.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+            
+            // Build table rows
+            let tableHTML = '';
+            currentWeekHomework.forEach(homework => {
+                tableHTML += `
+                    <tr>
+                        <td>${formatDate(homework.dueDate)}</td>
+                        <td>${homework.subject}</td>
+                        <td>${homework.description}</td>
+                        <td>${homework.teacher}</td>
+                    </tr>
+                `;
+            });
+            
+            templateTableBody.innerHTML = tableHTML;
+        }
+
+        // Render recent homework in teacher tab
+        function renderRecentHomework() {
+            // Get the 3 most recent homework assignments
+            const recent = [...homeworkData]
+                .sort((a, b) => new Date(b.addedDate) - new Date(a.addedDate))
+                .slice(0, 3);
+            
+            if (recent.length === 0) {
+                recentHomework.innerHTML += '<div class="no-homework">No homework added yet.</div>';
+                return;
+            }
+            
+            const recentHTML = recent.map(homework => `
+                <div class="homework-item">
+                    <div class="homework-header">
+                        <span class="homework-subject">${homework.subject} (${homework.class.toUpperCase()})</span>
+                        <span class="homework-date">Due: ${formatDate(homework.dueDate)}</span>
+                    </div>
+                    <div class="homework-description">${homework.description}</div>
+                </div>
+            `).join('');
+            
+            // Only update the list part, not the heading
+            const existingHeading = recentHomework.querySelector('h3');
+            recentHomework.innerHTML = '';
+            if (existingHeading) recentHomework.appendChild(existingHeading);
+            recentHomework.innerHTML += recentHTML;
+        }
+
+        // Apply selected template
+        function applyTemplate(template) {
+            const preview = document.getElementById('template-preview');
+            
+            // Remove existing template classes
+            preview.classList.remove('template-animals', 'template-nature', 'template-space', 'template-ocean', 'template-fairytale');
+            
+            // Add the selected template class
+            preview.classList.add(`template-${template}`);
+            
+            // Update header based on template
+            const header = preview.querySelector('.print-header h2');
+            switch(template) {
+                case 'animals':
+                    header.innerHTML = '🦁 Animal Friends Homework Diary';
+                    break;
+                case 'nature':
+                    header.innerHTML = '🌿 Nature Explorer Homework Diary';
+                    break;
+                case 'space':
+                    header.innerHTML = '🚀 Space Adventure Homework Diary';
+                    break;
+                case 'ocean':
+                    header.innerHTML = '🐠 Ocean World Homework Diary';
+                    break;
+                case 'fairytale':
+                    header.innerHTML = '👑 Fairy Tale Homework Diary';
+                    break;
+            }
+        }
+
+        // Helper function to format dates
+        function formatDate(dateString) {
+            const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+    </script>
+</body>
+</html>
