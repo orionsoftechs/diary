@@ -24,9 +24,14 @@
         }
         
         body {
-            background-color: #f0f8ff;
+            background: linear-gradient(135deg, #e0f7fa, #bbdefb);
             color: #333;
             line-height: 1.6;
+            min-height: 100vh;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%234CAF50" opacity="0.1"/></svg>'), 
+                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect x="10" y="10" width="60" height="60" fill="%23FF9800" opacity="0.1"/></svg>');
+            background-size: 150px 150px, 120px 120px;
+            background-position: 0 0, 75px 75px;
         }
         
         .container {
@@ -43,6 +48,18 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             border-radius: 0 0 20px 20px;
             margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
         }
         
         .header-content {
@@ -50,6 +67,8 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
         }
         
         .logo {
@@ -86,6 +105,25 @@
             justify-content: center;
             font-weight: bold;
             color: var(--primary);
+        }
+        
+        .auth-section {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .auth-form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .auth-form input {
+            flex: 1;
+            min-width: 200px;
         }
         
         .tabs {
@@ -208,6 +246,16 @@
             transform: translateY(-2px);
         }
         
+        .btn-warning {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-warning:hover {
+            background-color: #e68900;
+            transform: translateY(-2px);
+        }
+        
         .btn-danger {
             background-color: var(--accent2);
             color: white;
@@ -216,6 +264,11 @@
         .btn-danger:hover {
             background-color: #c2185b;
             transform: translateY(-2px);
+        }
+        
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 0.9rem;
         }
         
         .homework-list {
@@ -229,6 +282,7 @@
             margin-bottom: 15px;
             border-left: 5px solid var(--primary);
             transition: transform 0.3s;
+            position: relative;
         }
         
         .homework-item:hover {
@@ -262,11 +316,72 @@
             font-size: 0.9rem;
         }
         
+        .homework-actions {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 5px;
+        }
+        
         .admin-controls {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
             flex-wrap: wrap;
+        }
+        
+        .class-management {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .class-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .class-form input {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .classes-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .class-card {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .class-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .class-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .class-actions {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
         }
         
         .template-selector {
@@ -412,6 +527,73 @@
         .template-ocean .template-preview { background: linear-gradient(135deg, #4FC3F7, #0288D1); color: #E1F5FE; }
         .template-fairytale .template-preview { background: linear-gradient(135deg, #BA68C8, #8E24AA); color: #F3E5F5; }
         
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .close-modal:hover {
+            color: var(--dark);
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
         @media print {
             body * {
                 visibility: hidden;
@@ -451,6 +633,16 @@
             .template-selector {
                 grid-template-columns: 1fr;
             }
+            
+            .classes-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .homework-actions {
+                position: static;
+                margin-top: 10px;
+                justify-content: flex-end;
+            }
         }
     </style>
 </head>
@@ -462,53 +654,294 @@
                     <i class="fas fa-book-open"></i>
                     <h1>Pre-Primary Homework Diary</h1>
                 </div>
-                <div class="user-info">
-                    <div class="user-avatar">T</div>
-                    <span>Teacher Portal</span>
+                <div class="user-info" id="user-info">
+                    <div class="user-avatar" id="user-avatar">?</div>
+                    <span id="user-name">Not Logged In</span>
                 </div>
             </div>
         </div>
     </header>
     
     <div class="container">
-        <div class="tabs">
-            <div class="tab active" data-tab="teacher">Add Homework</div>
-            <div class="tab" data-tab="view">View Homework</div>
-            <div class="tab" data-tab="templates">Diary Templates</div>
-            <div class="tab" data-tab="admin">Admin</div>
+        <!-- Authentication Section -->
+        <div class="auth-section" id="auth-section">
+            <h2><i class="fas fa-user-shield"></i> Teacher Login</h2>
+            <div class="alert alert-error" id="auth-alert"></div>
+            <div class="auth-form">
+                <input type="text" id="teacher-username" placeholder="Username" value="teacher1">
+                <input type="password" id="teacher-password" placeholder="Password" value="password123">
+                <button class="btn btn-primary" id="login-btn"><i class="fas fa-sign-in-alt"></i> Login</button>
+                <button class="btn btn-success" id="register-btn"><i class="fas fa-user-plus"></i> Register</button>
+            </div>
+            <p><small>Demo accounts: teacher1/password123, teacher2/password123, admin/admin123</small></p>
         </div>
         
-        <!-- Teacher Tab - Add Homework -->
-        <div class="tab-content active" id="teacher-tab">
-            <h2><i class="fas fa-plus-circle"></i> Add New Homework</h2>
-            
-            <div class="class-selector">
-                <div class="class-btn active" data-class="all">All Classes</div>
-                <div class="class-btn" data-class="nursery">Nursery</div>
-                <div class="class-btn" data-class="kg1">KG-1</div>
-                <div class="class-btn" data-class="kg2">KG-2</div>
+        <!-- Main Application (hidden until login) -->
+        <div id="main-app" style="display: none;">
+            <div class="tabs">
+                <div class="tab active" data-tab="teacher">Add Homework</div>
+                <div class="tab" data-tab="view">View Homework</div>
+                <div class="tab" data-tab="classes">Manage Classes</div>
+                <div class="tab" data-tab="templates">Diary Templates</div>
+                <div class="tab" data-tab="admin">Admin</div>
             </div>
             
-            <form id="homework-form">
-                <div class="form-group">
-                    <label for="teacher-name"><i class="fas fa-user"></i> Teacher Name</label>
-                    <input type="text" id="teacher-name" placeholder="Enter your name" required>
+            <!-- Teacher Tab - Add Homework -->
+            <div class="tab-content active" id="teacher-tab">
+                <h2><i class="fas fa-plus-circle"></i> Add New Homework</h2>
+                
+                <div class="alert alert-success" id="add-success-alert"></div>
+                
+                <div class="class-selector" id="class-selector">
+                    <!-- Class buttons will be added here dynamically -->
                 </div>
                 
-                <div class="form-group">
-                    <label for="class"><i class="fas fa-users"></i> Class</label>
-                    <select id="class" required>
-                        <option value="">Select a class</option>
-                        <option value="nursery">Nursery</option>
-                        <option value="kg1">KG-1</option>
-                        <option value="kg2">KG-2</option>
+                <form id="homework-form">
+                    <div class="form-group">
+                        <label for="teacher-name"><i class="fas fa-user"></i> Teacher Name</label>
+                        <input type="text" id="teacher-name" placeholder="Enter your name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="class"><i class="fas fa-users"></i> Class</label>
+                        <select id="class" required>
+                            <option value="">Select a class</option>
+                            <!-- Classes will be populated dynamically -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject"><i class="fas fa-book"></i> Subject/Activity</label>
+                        <select id="subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="Language">Language Skills</option>
+                            <option value="Math">Math Concepts</option>
+                            <option value="Art">Art & Craft</option>
+                            <option value="Music">Music & Movement</option>
+                            <option value="Story">Story Time</option>
+                            <option value="Science">Science Exploration</option>
+                            <option value="Physical">Physical Development</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="due-date"><i class="fas fa-calendar-alt"></i> Due Date</label>
+                        <input type="date" id="due-date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="homework-description"><i class="fas fa-pencil-alt"></i> Activity Description (Use commas to separate into columns)</label>
+                        <textarea id="homework-description" placeholder="Describe the activity or homework. Use commas to separate into different columns when printed. Example: Practice writing A, B, C, Color the pictures" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add Homework</button>
+                </form>
+                
+                <div class="homework-list" id="recent-homework">
+                    <h3><i class="fas fa-history"></i> My Recent Activities</h3>
+                    <!-- Recent homework items will be added here by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- View Tab - View Homework -->
+            <div class="tab-content" id="view-tab">
+                <h2><i class="fas fa-list"></i> All Activities & Homework</h2>
+                
+                <div class="week-selector">
+                    <select id="week-filter">
+                        <option value="all">All Weeks</option>
+                        <option value="current">Current Week</option>
+                        <option value="next">Next Week</option>
+                    </select>
+                    <select id="class-filter">
+                        <option value="all">All Classes</option>
+                        <!-- Classes will be populated dynamically -->
+                    </select>
+                    <select id="subject-filter">
+                        <option value="all">All Subjects</option>
+                        <option value="Language">Language Skills</option>
+                        <option value="Math">Math Concepts</option>
+                        <option value="Art">Art & Craft</option>
+                        <option value="Music">Music & Movement</option>
+                        <option value="Story">Story Time</option>
+                        <option value="Science">Science Exploration</option>
+                        <option value="Physical">Physical Development</option>
+                    </select>
+                    <select id="teacher-filter">
+                        <option value="all">All Teachers</option>
+                        <!-- Teachers will be populated dynamically -->
                     </select>
                 </div>
                 
+                <div id="homework-list-view">
+                    <!-- Homework items will be displayed here by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Classes Tab -->
+            <div class="tab-content" id="classes-tab">
+                <h2><i class="fas fa-chalkboard-teacher"></i> Manage Classes</h2>
+                
+                <div class="alert alert-success" id="class-success-alert"></div>
+                
+                <div class="class-management">
+                    <h3><i class="fas fa-plus"></i> Add New Class</h3>
+                    <div class="class-form">
+                        <input type="text" id="new-class-name" placeholder="Class Name (e.g., Nursery A)">
+                        <input type="text" id="new-class-code" placeholder="Class Code (e.g., NUR-A)">
+                        <button class="btn btn-primary" id="add-class-btn"><i class="fas fa-plus"></i> Add Class</button>
+                    </div>
+                    
+                    <h3><i class="fas fa-list"></i> Existing Classes</h3>
+                    <div class="classes-list" id="classes-list">
+                        <!-- Classes will be displayed here dynamically -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Templates Tab -->
+            <div class="tab-content" id="templates-tab">
+                <h2><i class="fas fa-palette"></i> Choose a Diary Template</h2>
+                <p>Select a beautiful template for the homework diary. Each template has a unique design perfect for pre-primary children.</p>
+                
+                <div class="template-selector">
+                    <div class="template-card template-animals active" data-template="animals">
+                        <div class="template-preview">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <div class="template-info">
+                            <div class="template-name">Animal Friends</div>
+                            <div class="template-desc">Cute animals and nature elements</div>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card template-nature" data-template="nature">
+                        <div class="template-preview">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="template-info">
+                            <div class="template-name">Nature Explorer</div>
+                            <div class="template-desc">Plants, trees, and outdoor adventures</div>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card template-space" data-template="space">
+                        <div class="template-preview">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="template-info">
+                            <div class="template-name">Space Adventure</div>
+                            <div class="template-desc">Planets, stars, and rockets</div>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card template-ocean" data-template="ocean">
+                        <div class="template-preview">
+                            <i class="fas fa-fish"></i>
+                        </div>
+                        <div class="template-info">
+                            <div class="template-name">Ocean World</div>
+                            <div class="template-desc">Sea creatures and underwater scenes</div>
+                        </div>
+                    </div>
+                    
+                    <div class="template-card template-fairytale" data-template="fairytale">
+                        <div class="template-preview">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="template-info">
+                            <div class="template-name">Fairy Tale</div>
+                            <div class="template-desc">Castles, princesses, and magical creatures</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="diary-preview" id="template-preview">
+                    <div class="print-header">
+                        <h2>Pre-Primary Homework Diary</h2>
+                        <p>Week of: <span id="current-week">October 16-20, 2023</span></p>
+                        <p>Class: <span id="preview-class">Nursery</span></p>
+                    </div>
+                    
+                    <table class="diary-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Activity</th>
+                                <th>Description</th>
+                                <th>Teacher</th>
+                            </tr>
+                        </thead>
+                        <tbody id="template-table-body">
+                            <!-- Diary entries will be added here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="admin-controls">
+                    <button class="btn btn-primary" id="print-template"><i class="fas fa-print"></i> Print This Template</button>
+                    <button class="btn btn-success" id="save-template"><i class="fas fa-save"></i> Save Template</button>
+                </div>
+            </div>
+            
+            <!-- Admin Tab - Manage Diary -->
+            <div class="tab-content" id="admin-tab">
+                <h2><i class="fas fa-cog"></i> Admin - Homework Diary Management</h2>
+                
+                <div class="admin-controls">
+                    <button class="btn btn-primary" id="print-diary"><i class="fas fa-print"></i> Print Diary</button>
+                    <button class="btn btn-success" id="export-diary"><i class="fas fa-file-pdf"></i> Export as PDF</button>
+                    <button class="btn btn-danger" id="clear-all"><i class="fas fa-trash"></i> Clear All Homework</button>
+                </div>
+                
+                <div class="diary-preview">
+                    <div class="print-header">
+                        <h2>Pre-Primary Homework Diary</h2>
+                        <p>Week of: <span id="admin-current-week">October 16-20, 2023</span></p>
+                    </div>
+                    
+                    <table class="diary-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Class</th>
+                                <th>Activity</th>
+                                <th>Description</th>
+                                <th>Teacher</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-table-body">
+                            <!-- Diary entries will be added here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Homework Modal -->
+    <div class="modal" id="edit-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Homework</h3>
+                <button class="close-modal" id="close-edit-modal">&times;</button>
+            </div>
+            <form id="edit-homework-form">
+                <input type="hidden" id="edit-homework-id">
                 <div class="form-group">
-                    <label for="subject"><i class="fas fa-book"></i> Subject/Activity</label>
-                    <select id="subject" required>
-                        <option value="">Select a subject</option>
+                    <label for="edit-teacher-name">Teacher Name</label>
+                    <input type="text" id="edit-teacher-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-class">Class</label>
+                    <select id="edit-class" required>
+                        <!-- Classes will be populated dynamically -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-subject">Subject</label>
+                    <select id="edit-subject" required>
                         <option value="Language">Language Skills</option>
                         <option value="Math">Math Concepts</option>
                         <option value="Art">Art & Craft</option>
@@ -518,248 +951,203 @@
                         <option value="Physical">Physical Development</option>
                     </select>
                 </div>
-                
                 <div class="form-group">
-                    <label for="due-date"><i class="fas fa-calendar-alt"></i> Due Date</label>
-                    <input type="date" id="due-date" required>
+                    <label for="edit-due-date">Due Date</label>
+                    <input type="date" id="edit-due-date" required>
                 </div>
-                
                 <div class="form-group">
-                    <label for="homework-description"><i class="fas fa-pencil-alt"></i> Activity Description</label>
-                    <textarea id="homework-description" placeholder="Describe the activity or homework..." required></textarea>
+                    <label for="edit-description">Description</label>
+                    <textarea id="edit-description" required></textarea>
                 </div>
-                
-                <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add Homework</button>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Update Homework</button>
+                    <button type="button" class="btn btn-secondary" id="cancel-edit">Cancel</button>
+                </div>
             </form>
-            
-            <div class="homework-list" id="recent-homework">
-                <h3><i class="fas fa-history"></i> Recently Added Activities</h3>
-                <!-- Recent homework items will be added here by JavaScript -->
-            </div>
-        </div>
-        
-        <!-- View Tab - View Homework -->
-        <div class="tab-content" id="view-tab">
-            <h2><i class="fas fa-list"></i> All Activities & Homework</h2>
-            
-            <div class="week-selector">
-                <select id="week-filter">
-                    <option value="all">All Weeks</option>
-                    <option value="current">Current Week</option>
-                    <option value="next">Next Week</option>
-                </select>
-                <select id="class-filter">
-                    <option value="all">All Classes</option>
-                    <option value="nursery">Nursery</option>
-                    <option value="kg1">KG-1</option>
-                    <option value="kg2">KG-2</option>
-                </select>
-                <select id="subject-filter">
-                    <option value="all">All Subjects</option>
-                    <option value="Language">Language Skills</option>
-                    <option value="Math">Math Concepts</option>
-                    <option value="Art">Art & Craft</option>
-                    <option value="Music">Music & Movement</option>
-                    <option value="Story">Story Time</option>
-                    <option value="Science">Science Exploration</option>
-                    <option value="Physical">Physical Development</option>
-                </select>
-            </div>
-            
-            <div id="homework-list-view">
-                <!-- Homework items will be displayed here by JavaScript -->
-            </div>
-        </div>
-        
-        <!-- Templates Tab -->
-        <div class="tab-content" id="templates-tab">
-            <h2><i class="fas fa-palette"></i> Choose a Diary Template</h2>
-            <p>Select a beautiful template for the homework diary. Each template has a unique design perfect for pre-primary children.</p>
-            
-            <div class="template-selector">
-                <div class="template-card template-animals active" data-template="animals">
-                    <div class="template-preview">
-                        <i class="fas fa-paw"></i>
-                    </div>
-                    <div class="template-info">
-                        <div class="template-name">Animal Friends</div>
-                        <div class="template-desc">Cute animals and nature elements</div>
-                    </div>
-                </div>
-                
-                <div class="template-card template-nature" data-template="nature">
-                    <div class="template-preview">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <div class="template-info">
-                        <div class="template-name">Nature Explorer</div>
-                        <div class="template-desc">Plants, trees, and outdoor adventures</div>
-                    </div>
-                </div>
-                
-                <div class="template-card template-space" data-template="space">
-                    <div class="template-preview">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <div class="template-info">
-                        <div class="template-name">Space Adventure</div>
-                        <div class="template-desc">Planets, stars, and rockets</div>
-                    </div>
-                </div>
-                
-                <div class="template-card template-ocean" data-template="ocean">
-                    <div class="template-preview">
-                        <i class="fas fa-fish"></i>
-                    </div>
-                    <div class="template-info">
-                        <div class="template-name">Ocean World</div>
-                        <div class="template-desc">Sea creatures and underwater scenes</div>
-                    </div>
-                </div>
-                
-                <div class="template-card template-fairytale" data-template="fairytale">
-                    <div class="template-preview">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <div class="template-info">
-                        <div class="template-name">Fairy Tale</div>
-                        <div class="template-desc">Castles, princesses, and magical creatures</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="diary-preview" id="template-preview">
-                <div class="print-header">
-                    <h2>Pre-Primary Homework Diary</h2>
-                    <p>Week of: <span id="current-week">October 16-20, 2023</span></p>
-                    <p>Class: <span id="preview-class">Nursery</span></p>
-                </div>
-                
-                <table class="diary-table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Activity</th>
-                            <th>Description</th>
-                            <th>Teacher</th>
-                        </tr>
-                    </thead>
-                    <tbody id="template-table-body">
-                        <!-- Diary entries will be added here by JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="admin-controls">
-                <button class="btn btn-primary" id="print-template"><i class="fas fa-print"></i> Print This Template</button>
-                <button class="btn btn-success" id="save-template"><i class="fas fa-save"></i> Save Template</button>
-            </div>
-        </div>
-        
-        <!-- Admin Tab - Manage Diary -->
-        <div class="tab-content" id="admin-tab">
-            <h2><i class="fas fa-cog"></i> Admin - Homework Diary Management</h2>
-            
-            <div class="admin-controls">
-                <button class="btn btn-primary" id="print-diary"><i class="fas fa-print"></i> Print Diary</button>
-                <button class="btn btn-success" id="export-diary"><i class="fas fa-file-pdf"></i> Export as PDF</button>
-                <button class="btn btn-danger" id="clear-all"><i class="fas fa-trash"></i> Clear All Homework</button>
-            </div>
-            
-            <div class="diary-preview">
-                <div class="print-header">
-                    <h2>Pre-Primary Homework Diary</h2>
-                    <p>Week of: <span id="admin-current-week">October 16-20, 2023</span></p>
-                </div>
-                
-                <table class="diary-table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Class</th>
-                            <th>Activity</th>
-                            <th>Description</th>
-                            <th>Teacher</th>
-                        </tr>
-                    </thead>
-                    <tbody id="admin-table-body">
-                        <!-- Diary entries will be added here by JavaScript -->
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 
     <script>
-        // Sample data for demonstration
-        let homeworkData = [
-            {
-                id: 1,
-                teacher: "Ms. Johnson",
-                class: "nursery",
-                subject: "Art",
-                dueDate: "2023-10-18",
-                description: "Draw your favorite animal and color it.",
-                addedDate: "2023-10-16"
+        // Database simulation using localStorage
+        const DB = {
+            // Initialize database with sample data if empty
+            init: function() {
+                if (!localStorage.getItem('homeworkData')) {
+                    const sampleData = [
+                        {
+                            id: 1,
+                            teacher: "Ms. Johnson",
+                            class: "nursery",
+                            subject: "Art",
+                            dueDate: "2023-10-18",
+                            description: "Draw your favorite animal and color it",
+                            addedDate: "2023-10-16",
+                            teacherId: "teacher1"
+                        },
+                        {
+                            id: 2,
+                            teacher: "Mr. Davis",
+                            class: "kg1",
+                            subject: "Math",
+                            dueDate: "2023-10-20",
+                            description: "Count objects at home, Practice numbers 1-10, Identify shapes",
+                            addedDate: "2023-10-16",
+                            teacherId: "teacher2"
+                        },
+                        {
+                            id: 3,
+                            teacher: "Mrs. Wilson",
+                            class: "kg2",
+                            subject: "Language",
+                            dueDate: "2023-10-19",
+                            description: "Practice writing your name, Read a story with parents, Learn new words",
+                            addedDate: "2023-10-17",
+                            teacherId: "teacher1"
+                        }
+                    ];
+                    localStorage.setItem('homeworkData', JSON.stringify(sampleData));
+                }
+                
+                if (!localStorage.getItem('classes')) {
+                    const sampleClasses = [
+                        { id: 1, name: "Nursery", code: "NUR" },
+                        { id: 2, name: "KG-1", code: "KG1" },
+                        { id: 3, name: "KG-2", code: "KG2" }
+                    ];
+                    localStorage.setItem('classes', JSON.stringify(sampleClasses));
+                }
+                
+                if (!localStorage.getItem('teachers')) {
+                    const sampleTeachers = [
+                        { id: "teacher1", username: "teacher1", password: "password123", name: "Ms. Johnson" },
+                        { id: "teacher2", username: "teacher2", password: "password123", name: "Mr. Davis" },
+                        { id: "admin", username: "admin", password: "admin123", name: "Admin", isAdmin: true }
+                    ];
+                    localStorage.setItem('teachers', JSON.stringify(sampleTeachers));
+                }
             },
-            {
-                id: 2,
-                teacher: "Mr. Davis",
-                class: "kg1",
-                subject: "Math",
-                dueDate: "2023-10-20",
-                description: "Count objects at home (toys, fruits, etc.) up to 10.",
-                addedDate: "2023-10-16"
+            
+            // Homework methods
+            getHomework: function() {
+                return JSON.parse(localStorage.getItem('homeworkData') || '[]');
             },
-            {
-                id: 3,
-                teacher: "Mrs. Wilson",
-                class: "kg2",
-                subject: "Language",
-                dueDate: "2023-10-19",
-                description: "Practice writing your name 5 times.",
-                addedDate: "2023-10-17"
+            
+            addHomework: function(homework) {
+                const data = this.getHomework();
+                homework.id = data.length > 0 ? Math.max(...data.map(h => h.id)) + 1 : 1;
+                data.push(homework);
+                localStorage.setItem('homeworkData', JSON.stringify(data));
+                return homework;
             },
-            {
-                id: 4,
-                teacher: "Ms. Garcia",
-                class: "nursery",
-                subject: "Music",
-                dueDate: "2023-10-21",
-                description: "Sing the 'ABC' song with your family.",
-                addedDate: "2023-10-18"
+            
+            updateHomework: function(id, updatedHomework) {
+                const data = this.getHomework();
+                const index = data.findIndex(h => h.id === id);
+                if (index !== -1) {
+                    data[index] = { ...data[index], ...updatedHomework };
+                    localStorage.setItem('homeworkData', JSON.stringify(data));
+                    return true;
+                }
+                return false;
+            },
+            
+            deleteHomework: function(id, teacherId) {
+                const data = this.getHomework();
+                const homework = data.find(h => h.id === id);
+                
+                // Check if the current user is the owner or an admin
+                const currentUser = this.getCurrentUser();
+                if (homework.teacherId !== teacherId && !currentUser.isAdmin) {
+                    return { success: false, message: "You can only delete your own homework entries." };
+                }
+                
+                const filteredData = data.filter(h => h.id !== id);
+                localStorage.setItem('homeworkData', JSON.stringify(filteredData));
+                return { success: true, message: "Homework deleted successfully." };
+            },
+            
+            // Class methods
+            getClasses: function() {
+                return JSON.parse(localStorage.getItem('classes') || '[]');
+            },
+            
+            addClass: function(className, classCode) {
+                const data = this.getClasses();
+                const newClass = {
+                    id: data.length > 0 ? Math.max(...data.map(c => c.id)) + 1 : 1,
+                    name: className,
+                    code: classCode
+                };
+                data.push(newClass);
+                localStorage.setItem('classes', JSON.stringify(data));
+                return newClass;
+            },
+            
+            deleteClass: function(id) {
+                const data = this.getClasses();
+                const filteredData = data.filter(c => c.id !== id);
+                localStorage.setItem('classes', JSON.stringify(filteredData));
+                
+                // Also remove homework for this class
+                const homework = this.getHomework();
+                const filteredHomework = homework.filter(h => h.class !== id.toString());
+                localStorage.setItem('homeworkData', JSON.stringify(filteredHomework));
+            },
+            
+            // Teacher/Auth methods
+            getTeachers: function() {
+                return JSON.parse(localStorage.getItem('teachers') || '[]');
+            },
+            
+            registerTeacher: function(username, password, name) {
+                const teachers = this.getTeachers();
+                if (teachers.find(t => t.username === username)) {
+                    return { success: false, message: "Username already exists." };
+                }
+                
+                const newTeacher = {
+                    id: `teacher${teachers.length + 1}`,
+                    username,
+                    password,
+                    name
+                };
+                teachers.push(newTeacher);
+                localStorage.setItem('teachers', JSON.stringify(teachers));
+                return { success: true, message: "Registration successful. Please login." };
+            },
+            
+            login: function(username, password) {
+                const teachers = this.getTeachers();
+                const teacher = teachers.find(t => t.username === username && t.password === password);
+                if (teacher) {
+                    localStorage.setItem('currentUser', JSON.stringify(teacher));
+                    return { success: true, user: teacher };
+                }
+                return { success: false, message: "Invalid username or password." };
+            },
+            
+            getCurrentUser: function() {
+                return JSON.parse(localStorage.getItem('currentUser') || 'null');
+            },
+            
+            logout: function() {
+                localStorage.removeItem('currentUser');
             }
-        ];
-
-        // DOM elements
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tab-content');
-        const homeworkForm = document.getElementById('homework-form');
-        const homeworkListView = document.getElementById('homework-list-view');
-        const adminTableBody = document.getElementById('admin-table-body');
-        const templateTableBody = document.getElementById('template-table-body');
-        const recentHomework = document.getElementById('recent-homework');
-        const printButton = document.getElementById('print-diary');
-        const exportButton = document.getElementById('export-diary');
-        const clearButton = document.getElementById('clear-all');
-        const weekFilter = document.getElementById('week-filter');
-        const classFilter = document.getElementById('class-filter');
-        const subjectFilter = document.getElementById('subject-filter');
-        const classButtons = document.querySelectorAll('.class-btn');
-        const templateCards = document.querySelectorAll('.template-card');
-        const printTemplateButton = document.getElementById('print-template');
-        const saveTemplateButton = document.getElementById('save-template');
+        };
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize database
+            DB.init();
+            
+            // Check if user is already logged in
+            const currentUser = DB.getCurrentUser();
+            if (currentUser) {
+                showMainApp(currentUser);
+            }
+            
             // Set default date to today
             document.getElementById('due-date').valueAsDate = new Date();
-            
-            // Load initial data
-            renderHomeworkList();
-            renderAdminTable();
-            renderTemplateTable();
-            renderRecentHomework();
             
             // Set up event listeners
             setupEventListeners();
@@ -767,17 +1155,21 @@
 
         // Set up event listeners
         function setupEventListeners() {
+            // Authentication
+            document.getElementById('login-btn').addEventListener('click', handleLogin);
+            document.getElementById('register-btn').addEventListener('click', handleRegister);
+            
             // Tab switching
-            tabs.forEach(tab => {
+            document.querySelectorAll('.tab').forEach(tab => {
                 tab.addEventListener('click', () => {
                     const tabId = tab.getAttribute('data-tab');
                     
                     // Update active tab
-                    tabs.forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
                     
                     // Update active tab content
-                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
                     document.getElementById(`${tabId}-tab`).classList.add('active');
                     
                     // Refresh data when switching tabs
@@ -787,31 +1179,32 @@
                         renderAdminTable();
                     } else if (tabId === 'templates') {
                         renderTemplateTable();
+                    } else if (tabId === 'classes') {
+                        renderClasses();
+                    } else if (tabId === 'teacher') {
+                        renderRecentHomework();
                     }
                 });
             });
             
             // Form submission
-            homeworkForm.addEventListener('submit', function(e) {
+            document.getElementById('homework-form').addEventListener('submit', function(e) {
                 e.preventDefault();
                 addHomework();
             });
             
-            // Class filter buttons
-            classButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    classButtons.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    const selectedClass = this.getAttribute('data-class');
-                    filterHomeworkByClass(selectedClass);
-                });
+            document.getElementById('edit-homework-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                updateHomework();
             });
             
+            // Class management
+            document.getElementById('add-class-btn').addEventListener('click', addClass);
+            
             // Template selection
-            templateCards.forEach(card => {
+            document.querySelectorAll('.template-card').forEach(card => {
                 card.addEventListener('click', function() {
-                    templateCards.forEach(c => c.classList.remove('active'));
+                    document.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
                     this.classList.add('active');
                     
                     const template = this.getAttribute('data-template');
@@ -820,27 +1213,28 @@
             });
             
             // Print functionality
-            printButton.addEventListener('click', function() {
+            document.getElementById('print-diary').addEventListener('click', function() {
                 window.print();
             });
             
-            printTemplateButton.addEventListener('click', function() {
+            document.getElementById('print-template').addEventListener('click', function() {
                 window.print();
             });
             
             // Export functionality (simulated)
-            exportButton.addEventListener('click', function() {
+            document.getElementById('export-diary').addEventListener('click', function() {
                 alert('In a real application, this would export the diary as a PDF file.');
             });
             
-            saveTemplateButton.addEventListener('click', function() {
+            document.getElementById('save-template').addEventListener('click', function() {
                 alert('Template saved successfully!');
             });
             
             // Clear all homework
-            clearButton.addEventListener('click', function() {
+            document.getElementById('clear-all').addEventListener('click', function() {
                 if (confirm('Are you sure you want to clear all homework? This action cannot be undone.')) {
-                    homeworkData = [];
+                    localStorage.removeItem('homeworkData');
+                    DB.init(); // Reinitialize with sample data
                     renderHomeworkList();
                     renderAdminTable();
                     renderTemplateTable();
@@ -850,63 +1244,227 @@
             });
             
             // Filter changes
-            weekFilter.addEventListener('change', renderHomeworkList);
-            classFilter.addEventListener('change', renderHomeworkList);
-            subjectFilter.addEventListener('change', renderHomeworkList);
-        }
-
-        // Add new homework
-        function addHomework() {
-            const teacherName = document.getElementById('teacher-name').value;
-            const className = document.getElementById('class').value;
-            const subject = document.getElementById('subject').value;
-            const dueDate = document.getElementById('due-date').value;
-            const description = document.getElementById('homework-description').value;
+            document.getElementById('week-filter').addEventListener('change', renderHomeworkList);
+            document.getElementById('class-filter').addEventListener('change', renderHomeworkList);
+            document.getElementById('subject-filter').addEventListener('change', renderHomeworkList);
+            document.getElementById('teacher-filter').addEventListener('change', renderHomeworkList);
             
-            const newHomework = {
-                id: homeworkData.length > 0 ? Math.max(...homeworkData.map(h => h.id)) + 1 : 1,
-                teacher: teacherName,
-                class: className,
-                subject: subject,
-                dueDate: dueDate,
-                description: description,
-                addedDate: new Date().toISOString().split('T')[0]
-            };
-            
-            homeworkData.push(newHomework);
-            
-            // Reset form
-            homeworkForm.reset();
-            document.getElementById('due-date').valueAsDate = new Date();
-            
-            // Update displays
-            renderRecentHomework();
-            
-            alert('Homework added successfully!');
-        }
-
-        // Filter homework by class
-        function filterHomeworkByClass(selectedClass) {
-            const homeworkItems = document.querySelectorAll('.homework-item');
-            
-            homeworkItems.forEach(item => {
-                if (selectedClass === 'all' || item.getAttribute('data-class') === selectedClass) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
+            // Modal controls
+            document.getElementById('close-edit-modal').addEventListener('click', closeEditModal);
+            document.getElementById('cancel-edit').addEventListener('click', closeEditModal);
+            document.getElementById('edit-modal').addEventListener('click', function(e) {
+                if (e.target === this) closeEditModal();
             });
         }
 
-        // Render homework list in the view tab
+        // Authentication handlers
+        function handleLogin() {
+            const username = document.getElementById('teacher-username').value;
+            const password = document.getElementById('teacher-password').value;
+            const authAlert = document.getElementById('auth-alert');
+            
+            const result = DB.login(username, password);
+            if (result.success) {
+                showMainApp(result.user);
+                authAlert.style.display = 'none';
+            } else {
+                authAlert.textContent = result.message;
+                authAlert.style.display = 'block';
+                authAlert.className = 'alert alert-error';
+            }
+        }
+        
+        function handleRegister() {
+            const username = document.getElementById('teacher-username').value;
+            const password = document.getElementById('teacher-password').value;
+            const authAlert = document.getElementById('auth-alert');
+            
+            if (!username || !password) {
+                authAlert.textContent = "Please enter both username and password.";
+                authAlert.style.display = 'block';
+                authAlert.className = 'alert alert-error';
+                return;
+            }
+            
+            const name = prompt("Please enter your full name:");
+            if (!name) return;
+            
+            const result = DB.registerTeacher(username, password, name);
+            authAlert.textContent = result.message;
+            authAlert.style.display = 'block';
+            authAlert.className = result.success ? 'alert alert-success' : 'alert alert-error';
+        }
+        
+        function showMainApp(user) {
+            document.getElementById('auth-section').style.display = 'none';
+            document.getElementById('main-app').style.display = 'block';
+            document.getElementById('user-name').textContent = user.name;
+            document.getElementById('user-avatar').textContent = user.name.charAt(0).toUpperCase();
+            
+            // Populate class dropdowns and filters
+            populateClassSelectors();
+            renderRecentHomework();
+            renderHomeworkList();
+            renderClasses();
+            
+            // Set teacher name in form if not admin
+            if (!user.isAdmin) {
+                document.getElementById('teacher-name').value = user.name;
+            }
+        }
+
+        // Class management
+        function populateClassSelectors() {
+            const classes = DB.getClasses();
+            const classSelect = document.getElementById('class');
+            const classFilter = document.getElementById('class-filter');
+            const editClassSelect = document.getElementById('edit-class');
+            const classSelector = document.getElementById('class-selector');
+            
+            // Clear existing options
+            classSelect.innerHTML = '<option value="">Select a class</option>';
+            classFilter.innerHTML = '<option value="all">All Classes</option>';
+            editClassSelect.innerHTML = '';
+            classSelector.innerHTML = '';
+            
+            // Populate class select dropdowns
+            classes.forEach(cls => {
+                classSelect.innerHTML += `<option value="${cls.id}">${cls.name} (${cls.code})</option>`;
+                classFilter.innerHTML += `<option value="${cls.id}">${cls.name}</option>`;
+                editClassSelect.innerHTML += `<option value="${cls.id}">${cls.name} (${cls.code})</option>`;
+                
+                // Add class buttons
+                const classBtn = document.createElement('div');
+                classBtn.className = 'class-btn';
+                classBtn.setAttribute('data-class', cls.id);
+                classBtn.textContent = cls.name;
+                classBtn.addEventListener('click', function() {
+                    document.querySelectorAll('.class-btn').forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    classSelect.value = cls.id;
+                });
+                classSelector.appendChild(classBtn);
+            });
+            
+            // Populate teacher filter
+            const teachers = DB.getTeachers();
+            const teacherFilter = document.getElementById('teacher-filter');
+            teacherFilter.innerHTML = '<option value="all">All Teachers</option>';
+            teachers.forEach(teacher => {
+                if (!teacher.isAdmin) {
+                    teacherFilter.innerHTML += `<option value="${teacher.id}">${teacher.name}</option>`;
+                }
+            });
+        }
+        
+        function renderClasses() {
+            const classes = DB.getClasses();
+            const classesList = document.getElementById('classes-list');
+            const currentUser = DB.getCurrentUser();
+            
+            classesList.innerHTML = '';
+            
+            if (classes.length === 0) {
+                classesList.innerHTML = '<div class="no-homework">No classes added yet.</div>';
+                return;
+            }
+            
+            classes.forEach(cls => {
+                const classCard = document.createElement('div');
+                classCard.className = 'class-card';
+                classCard.innerHTML = `
+                    <h3>${cls.name}</h3>
+                    <p>Code: ${cls.code}</p>
+                    <div class="class-actions">
+                        <button class="btn btn-danger btn-sm delete-class" data-id="${cls.id}">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                `;
+                classesList.appendChild(classCard);
+            });
+            
+            // Add event listeners to delete buttons
+            document.querySelectorAll('.delete-class').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const classId = parseInt(this.getAttribute('data-id'));
+                    if (confirm(`Are you sure you want to delete this class? All homework for this class will also be deleted.`)) {
+                        DB.deleteClass(classId);
+                        renderClasses();
+                        populateClassSelectors();
+                        renderHomeworkList();
+                        renderAdminTable();
+                        showAlert('Class deleted successfully.', 'class-success-alert');
+                    }
+                });
+            });
+        }
+        
+        function addClass() {
+            const className = document.getElementById('new-class-name').value;
+            const classCode = document.getElementById('new-class-code').value;
+            
+            if (!className || !classCode) {
+                alert('Please enter both class name and code.');
+                return;
+            }
+            
+            DB.addClass(className, classCode);
+            document.getElementById('new-class-name').value = '';
+            document.getElementById('new-class-code').value = '';
+            renderClasses();
+            populateClassSelectors();
+            showAlert('Class added successfully.', 'class-success-alert');
+        }
+
+        // Homework management
+        function addHomework() {
+            const teacherName = document.getElementById('teacher-name').value;
+            const classId = document.getElementById('class').value;
+            const subject = document.getElementById('subject').value;
+            const dueDate = document.getElementById('due-date').value;
+            const description = document.getElementById('homework-description').value;
+            const currentUser = DB.getCurrentUser();
+            
+            if (!teacherName || !classId || !subject || !dueDate || !description) {
+                alert('Please fill in all fields.');
+                return;
+            }
+            
+            const newHomework = {
+                teacher: teacherName,
+                class: classId,
+                subject: subject,
+                dueDate: dueDate,
+                description: description,
+                addedDate: new Date().toISOString().split('T')[0],
+                teacherId: currentUser.id
+            };
+            
+            DB.addHomework(newHomework);
+            
+            // Reset form
+            document.getElementById('homework-form').reset();
+            document.getElementById('due-date').valueAsDate = new Date();
+            if (!currentUser.isAdmin) {
+                document.getElementById('teacher-name').value = currentUser.name;
+            }
+            
+            // Update displays
+            renderRecentHomework();
+            showAlert('Homework added successfully!', 'add-success-alert');
+        }
+        
         function renderHomeworkList() {
-            const weekFilterValue = weekFilter.value;
-            const classFilterValue = classFilter.value;
-            const subjectFilterValue = subjectFilter.value;
+            const weekFilterValue = document.getElementById('week-filter').value;
+            const classFilterValue = document.getElementById('class-filter').value;
+            const subjectFilterValue = document.getElementById('subject-filter').value;
+            const teacherFilterValue = document.getElementById('teacher-filter').value;
+            const currentUser = DB.getCurrentUser();
             
-            let filteredHomework = [...homeworkData];
+            let homework = DB.getHomework();
             
-            // Apply week filter
+            // Apply filters
             if (weekFilterValue !== 'all') {
                 const today = new Date();
                 const startOfWeek = new Date(today);
@@ -916,8 +1474,8 @@
                     const endOfWeek = new Date(startOfWeek);
                     endOfWeek.setDate(startOfWeek.getDate() + 6);
                     
-                    filteredHomework = filteredHomework.filter(homework => {
-                        const dueDate = new Date(homework.dueDate);
+                    homework = homework.filter(h => {
+                        const dueDate = new Date(h.dueDate);
                         return dueDate >= startOfWeek && dueDate <= endOfWeek;
                     });
                 } else if (weekFilterValue === 'next') {
@@ -926,140 +1484,109 @@
                     const endOfNextWeek = new Date(startOfNextWeek);
                     endOfNextWeek.setDate(startOfNextWeek.getDate() + 6);
                     
-                    filteredHomework = filteredHomework.filter(homework => {
-                        const dueDate = new Date(homework.dueDate);
+                    homework = homework.filter(h => {
+                        const dueDate = new Date(h.dueDate);
                         return dueDate >= startOfNextWeek && dueDate <= endOfNextWeek;
                     });
                 }
             }
             
-            // Apply class filter
             if (classFilterValue !== 'all') {
-                filteredHomework = filteredHomework.filter(homework => 
-                    homework.class === classFilterValue
-                );
+                homework = homework.filter(h => h.class === classFilterValue);
             }
             
-            // Apply subject filter
             if (subjectFilterValue !== 'all') {
-                filteredHomework = filteredHomework.filter(homework => 
-                    homework.subject === subjectFilterValue
-                );
+                homework = homework.filter(h => h.subject === subjectFilterValue);
+            }
+            
+            if (teacherFilterValue !== 'all') {
+                homework = homework.filter(h => h.teacherId === teacherFilterValue);
             }
             
             // Sort by due date
-            filteredHomework.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+            homework.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+            
+            // Get class names for display
+            const classes = DB.getClasses();
+            const classMap = {};
+            classes.forEach(cls => {
+                classMap[cls.id] = cls.name;
+            });
             
             // Render the list
-            if (filteredHomework.length === 0) {
+            const homeworkListView = document.getElementById('homework-list-view');
+            
+            if (homework.length === 0) {
                 homeworkListView.innerHTML = '<div class="no-homework">No homework assignments found.</div>';
                 return;
             }
             
-            homeworkListView.innerHTML = filteredHomework.map(homework => `
-                <div class="homework-item" data-class="${homework.class}">
-                    <div class="homework-header">
-                        <span class="homework-subject">${homework.subject} (${homework.class.toUpperCase()})</span>
-                        <span class="homework-date">Due: ${formatDate(homework.dueDate)}</span>
+            homeworkListView.innerHTML = homework.map(h => `
+                <div class="homework-item" data-id="${h.id}">
+                    <div class="homework-actions">
+                        ${h.teacherId === currentUser.id || currentUser.isAdmin ? `
+                            <button class="btn btn-warning btn-sm edit-homework" data-id="${h.id}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm delete-homework" data-id="${h.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        ` : ''}
                     </div>
-                    <div class="homework-description">${homework.description}</div>
-                    <div class="homework-teacher">Assigned by: ${homework.teacher}</div>
+                    <div class="homework-header">
+                        <span class="homework-subject">${h.subject} (${classMap[h.class] || h.class})</span>
+                        <span class="homework-date">Due: ${formatDate(h.dueDate)}</span>
+                    </div>
+                    <div class="homework-description">${h.description}</div>
+                    <div class="homework-teacher">Assigned by: ${h.teacher}</div>
                 </div>
             `).join('');
-        }
-
-        // Render admin table
-        function renderAdminTable() {
-            if (homeworkData.length === 0) {
-                adminTableBody.innerHTML = `
-                    <tr>
-                        <td colspan="5" class="no-homework">No homework assignments to display.</td>
-                    </tr>
-                `;
-                return;
-            }
             
-            // Sort by due date
-            const sortedHomework = [...homeworkData].sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-            
-            // Build table rows
-            let tableHTML = '';
-            sortedHomework.forEach(homework => {
-                tableHTML += `
-                    <tr>
-                        <td>${formatDate(homework.dueDate)}</td>
-                        <td>${homework.class.toUpperCase()}</td>
-                        <td>${homework.subject}</td>
-                        <td>${homework.description}</td>
-                        <td>${homework.teacher}</td>
-                    </tr>
-                `;
+            // Add event listeners to action buttons
+            document.querySelectorAll('.edit-homework').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const homeworkId = parseInt(this.getAttribute('data-id'));
+                    openEditModal(homeworkId);
+                });
             });
             
-            adminTableBody.innerHTML = tableHTML;
-        }
-
-        // Render template table
-        function renderTemplateTable() {
-            if (homeworkData.length === 0) {
-                templateTableBody.innerHTML = `
-                    <tr>
-                        <td colspan="4" class="no-homework">No homework assignments to display.</td>
-                    </tr>
-                `;
-                return;
-            }
-            
-            // Get only current week homework
-            const today = new Date();
-            const startOfWeek = new Date(today);
-            startOfWeek.setDate(today.getDate() - today.getDay());
-            const endOfWeek = new Date(startOfWeek);
-            endOfWeek.setDate(startOfWeek.getDate() + 6);
-            
-            const currentWeekHomework = homeworkData.filter(homework => {
-                const dueDate = new Date(homework.dueDate);
-                return dueDate >= startOfWeek && dueDate <= endOfWeek;
+            document.querySelectorAll('.delete-homework').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const homeworkId = parseInt(this.getAttribute('data-id'));
+                    deleteHomework(homeworkId);
+                });
             });
-            
-            // Sort by due date
-            currentWeekHomework.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-            
-            // Build table rows
-            let tableHTML = '';
-            currentWeekHomework.forEach(homework => {
-                tableHTML += `
-                    <tr>
-                        <td>${formatDate(homework.dueDate)}</td>
-                        <td>${homework.subject}</td>
-                        <td>${homework.description}</td>
-                        <td>${homework.teacher}</td>
-                    </tr>
-                `;
-            });
-            
-            templateTableBody.innerHTML = tableHTML;
         }
-
-        // Render recent homework in teacher tab
+        
         function renderRecentHomework() {
-            // Get the 3 most recent homework assignments
-            const recent = [...homeworkData]
+            const currentUser = DB.getCurrentUser();
+            // Get the 3 most recent homework assignments by the current user
+            const homework = DB.getHomework()
+                .filter(h => h.teacherId === currentUser.id)
                 .sort((a, b) => new Date(b.addedDate) - new Date(a.addedDate))
                 .slice(0, 3);
             
-            if (recent.length === 0) {
+            // Get class names for display
+            const classes = DB.getClasses();
+            const classMap = {};
+            classes.forEach(cls => {
+                classMap[cls.id] = cls.name;
+            });
+            
+            const recentHomework = document.getElementById('recent-homework');
+            
+            if (homework.length === 0) {
                 recentHomework.innerHTML += '<div class="no-homework">No homework added yet.</div>';
                 return;
             }
             
-            const recentHTML = recent.map(homework => `
+            const recentHTML = homework.map(h => `
                 <div class="homework-item">
                     <div class="homework-header">
-                        <span class="homework-subject">${homework.subject} (${homework.class.toUpperCase()})</span>
-                        <span class="homework-date">Due: ${formatDate(homework.dueDate)}</span>
+                        <span class="homework-subject">${h.subject} (${classMap[h.class] || h.class})</span>
+                        <span class="homework-date">Due: ${formatDate(h.dueDate)}</span>
                     </div>
-                    <div class="homework-description">${homework.description}</div>
+                    <div class="homework-description">${h.description}</div>
                 </div>
             `).join('');
             
@@ -1069,8 +1596,190 @@
             if (existingHeading) recentHomework.appendChild(existingHeading);
             recentHomework.innerHTML += recentHTML;
         }
+        
+        function renderAdminTable() {
+            const homework = DB.getHomework();
+            const classes = DB.getClasses();
+            const classMap = {};
+            classes.forEach(cls => {
+                classMap[cls.id] = cls.name;
+            });
+            
+            const adminTableBody = document.getElementById('admin-table-body');
+            
+            if (homework.length === 0) {
+                adminTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="no-homework">No homework assignments to display.</td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            // Sort by due date
+            homework.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+            
+            // Build table rows
+            let tableHTML = '';
+            homework.forEach(h => {
+                tableHTML += `
+                    <tr>
+                        <td>${formatDate(h.dueDate)}</td>
+                        <td>${classMap[h.class] || h.class}</td>
+                        <td>${h.subject}</td>
+                        <td>${h.description}</td>
+                        <td>${h.teacher}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm edit-homework" data-id="${h.id}">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="btn btn-danger btn-sm delete-homework" data-id="${h.id}">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            adminTableBody.innerHTML = tableHTML;
+            
+            // Add event listeners to action buttons
+            document.querySelectorAll('.edit-homework').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const homeworkId = parseInt(this.getAttribute('data-id'));
+                    openEditModal(homeworkId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-homework').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const homeworkId = parseInt(this.getAttribute('data-id'));
+                    deleteHomework(homeworkId);
+                });
+            });
+        }
+        
+        function renderTemplateTable() {
+            const homework = DB.getHomework();
+            const classes = DB.getClasses();
+            const classMap = {};
+            classes.forEach(cls => {
+                classMap[cls.id] = cls.name;
+            });
+            
+            // Get only current week homework
+            const today = new Date();
+            const startOfWeek = new Date(today);
+            startOfWeek.setDate(today.getDate() - today.getDay());
+            const endOfWeek = new Date(startOfWeek);
+            endOfWeek.setDate(startOfWeek.getDate() + 6);
+            
+            const currentWeekHomework = homework.filter(h => {
+                const dueDate = new Date(h.dueDate);
+                return dueDate >= startOfWeek && dueDate <= endOfWeek;
+            });
+            
+            // Sort by due date
+            currentWeekHomework.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+            
+            // Build table rows
+            const templateTableBody = document.getElementById('template-table-body');
+            
+            if (currentWeekHomework.length === 0) {
+                templateTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="no-homework">No homework assignments for this week.</td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            let tableHTML = '';
+            currentWeekHomework.forEach(h => {
+                // Split description by commas for multiple columns
+                const descriptionParts = h.description.split(',').map(part => part.trim());
+                
+                tableHTML += `
+                    <tr>
+                        <td>${formatDate(h.dueDate)}</td>
+                        <td>${h.subject}</td>
+                        <td>
+                            ${descriptionParts.map(part => `<div>${part}</div>`).join('')}
+                        </td>
+                        <td>${h.teacher}</td>
+                    </tr>
+                `;
+            });
+            
+            templateTableBody.innerHTML = tableHTML;
+            
+            // Update week display
+            document.getElementById('current-week').textContent = 
+                `${formatDate(startOfWeek.toISOString().split('T')[0])} - ${formatDate(endOfWeek.toISOString().split('T')[0])}`;
+        }
+        
+        function openEditModal(homeworkId) {
+            const homework = DB.getHomework().find(h => h.id === homeworkId);
+            if (!homework) return;
+            
+            document.getElementById('edit-homework-id').value = homework.id;
+            document.getElementById('edit-teacher-name').value = homework.teacher;
+            document.getElementById('edit-class').value = homework.class;
+            document.getElementById('edit-subject').value = homework.subject;
+            document.getElementById('edit-due-date').value = homework.dueDate;
+            document.getElementById('edit-description').value = homework.description;
+            
+            document.getElementById('edit-modal').style.display = 'flex';
+        }
+        
+        function closeEditModal() {
+            document.getElementById('edit-modal').style.display = 'none';
+        }
+        
+        function updateHomework() {
+            const homeworkId = parseInt(document.getElementById('edit-homework-id').value);
+            const teacherName = document.getElementById('edit-teacher-name').value;
+            const classId = document.getElementById('edit-class').value;
+            const subject = document.getElementById('edit-subject').value;
+            const dueDate = document.getElementById('edit-due-date').value;
+            const description = document.getElementById('edit-description').value;
+            
+            const updatedHomework = {
+                teacher: teacherName,
+                class: classId,
+                subject: subject,
+                dueDate: dueDate,
+                description: description
+            };
+            
+            if (DB.updateHomework(homeworkId, updatedHomework)) {
+                closeEditModal();
+                renderHomeworkList();
+                renderAdminTable();
+                renderTemplateTable();
+                renderRecentHomework();
+                alert('Homework updated successfully!');
+            } else {
+                alert('Error updating homework.');
+            }
+        }
+        
+        function deleteHomework(homeworkId) {
+            const currentUser = DB.getCurrentUser();
+            const result = DB.deleteHomework(homeworkId, currentUser.id);
+            
+            if (result.success) {
+                renderHomeworkList();
+                renderAdminTable();
+                renderTemplateTable();
+                renderRecentHomework();
+                alert(result.message);
+            } else {
+                alert(result.message);
+            }
+        }
 
-        // Apply selected template
+        // Template application
         function applyTemplate(template) {
             const preview = document.getElementById('template-preview');
             
@@ -1101,10 +1810,21 @@
             }
         }
 
-        // Helper function to format dates
+        // Helper functions
         function formatDate(dateString) {
             const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
             return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+        
+        function showAlert(message, alertId) {
+            const alert = document.getElementById(alertId);
+            alert.textContent = message;
+            alert.style.display = 'block';
+            alert.className = 'alert alert-success';
+            
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 3000);
         }
     </script>
 </body>
